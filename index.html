@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript in Body</h2>
+
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/babel">
+
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {url: ''};
+
+    // This binding is necessary to make `this` work in the callback
+    //this.handleClickCat = this.handleClickCat.bind(this);
+    //this.handleClickDog = this.handleClickDog.bind(this);
+    //this.handleClickCar = this.handleClickCar.bind(this);
+  }
+
+  handleClickCat() {
+    axios.get('http://randomsite.tr.ht/randomsite.tr.ht/gyh/cdc.json')
+    .then(response => this.setState({url: response.data.cat.url}));
+  }
+
+  handleClickDog() {
+    axios.get('http://randomsite.tr.ht/randomsite.tr.ht/gyh/cdc.json')
+    .then(response => this.setState({url: response.data.dog.url}));
+  }
+
+  handleClickCar() {
+    axios.get('http://randomsite.tr.ht/randomsite.tr.ht/gyh/cdc.json')
+    .then(response => this.setState({url: response.data.cat.url}));
+  }
+
+
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClickCat}>
+          Cat
+        </button>
+        <button onClick={this.handleClickDog}>
+          Dog
+        </button>
+        <button onClick={this.handleClickCar}>
+          Car
+        </button>
+        <img src={this.state.url}/>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Toggle />,
+  document.getElementById('root')
+);
+</script>
+
+
+
+</body>
+</html>
